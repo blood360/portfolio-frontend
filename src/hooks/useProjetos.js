@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react";
-import api from "../services/api";
+import axios from 'axios';
 
-export function useProjetos() {
-  const [projetos, setProjetos] = useState([]);
-  const [loading, setLoading] = useState(true);
+// A URL base da tua API hospedada no Render
+const api = axios.create({
+  baseURL: "https://portfolio-backend-0k7x.onrender.com", 
+});
 
-  useEffect(() => {
-    async function carregarProjetos() {
-      try {
-        const res = await api.get("/projetos");
-        setProjetos(res.data);
-      } catch (error) {
-        console.error("Erro ao buscar projetos:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    carregarProjetos();
-  }, []);
-
-  return { projetos, loading };
-}
+export default api;
